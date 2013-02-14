@@ -1,0 +1,26 @@
+h1 {
+	font-family: 'Helvetica neue', 'Helvetica', 'Arial', sans-serif;
+	font-size: 48px;
+	font-weight: 300;
+	color: #999;
+	text-align: center;
+	
+	margin: 50px;
+}
+
+#ascii {
+	font-family: 'Courier New', 'Courier', monospace;
+	font-size: 10px;
+	line-height: 10px;
+	letter-spacing: -1.5px;
+	text-align: center;
+
+	margin: 50px;
+}
+
+#fork {
+	 position: absolute; 
+	 top: 0; 
+	 right: 0; 
+	 border: 0;
+}
