@@ -1,3 +1,11 @@
+/*
+ * ASCII Camera
+ * http://idevelop.github.com/ascii-camera/
+ *
+ * Copyright 2013, Andrei Gheorghe (http://github.com/idevelop)
+ * Released under the MIT license
+ */
+
 (function() {
 	var asciiContainer = document.getElementById("ascii");
 
@@ -19,6 +27,10 @@
 			document.getElementById("info").style.display = "none";
 		},
 
-		onError: console.error
+		onError: console.error,
+
+		onNotSupported: function() {
+			document.getElementById("notSupported").style.display = "block";
+		}
 	});
 })();

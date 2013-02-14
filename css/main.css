@@ -1,11 +1,27 @@
+body {		
+	padding: 50px;
+}
+
 h1 {
 	font-family: 'Helvetica neue', 'Helvetica', 'Arial', sans-serif;
 	font-size: 48px;
 	font-weight: 300;
 	color: #999;
 	text-align: center;
-	
-	margin: 50px;
+}
+
+#notSupported {
+	display: none;
+}
+
+#notSupported h1 {
+	color: #b41a1a;
+	margin-bottom: 20px;
+}
+
+#notSupported img {
+	display: block;
+	margin: 0 auto;
 }
 
 #ascii {
@@ -14,8 +30,6 @@ h1 {
 	line-height: 10px;
 	letter-spacing: -1.5px;
 	text-align: center;
-
-	margin: 50px;
 }
 
 #fork {

@@ -1,3 +1,5 @@
+// Author: Andrei Gheorghe (http://github.com/idevelop)
+
 var camera = (function() {
 	var doNothing = function(){};
 
@@ -24,7 +26,7 @@ var camera = (function() {
 				startVideoStream(video, options);
 			}, options.onError);
 		} else {
-			options.onError("getUserMedia not supported");
+			options.onNotSupported();
 		}
 	}
 
@@ -64,6 +66,7 @@ var camera = (function() {
 
 			options.onSuccess = options.onSuccess || doNothing;
 			options.onError = options.onError || doNothing;
+			options.onNotSupported = options.onNotSupported || doNothing;
 			options.onFrame = options.onFrame || doNothing;
 
 			initCamera(options);

@@ -1,7 +1,9 @@
+// Author: Andrei Gheorghe (http://github.com/idevelop)
+
 var ascii = (function() {
 	function asciiFromCanvas(canvas, context, options, callback) {
 		// Original code from http://www.nihilogic.dk/labs/jsascii/
-		// Heavily modified by Andrei Gheorghe: http://github.com/idevelop
+		// Heavily modified by Andrei Gheorghe (http://github.com/idevelop)
 
 		var characters = (" .,:;i1tfLCG08@").split("");
 
@@ -48,7 +50,7 @@ var ascii = (function() {
 		var contrastedImageData = contrastedContext.createImageData(imageData.width, imageData.height);
 
 		var imageDataLength = imageData.data.length;
-		for (var i = 0; i < imageDataLength; i+=4) {
+		for (var i = 0; i < imageDataLength; i += 4) {
 			var color = {
 				red: imageData.data[i],
 				green: imageData.data[i + 1],
