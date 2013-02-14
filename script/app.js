@@ -30,6 +30,7 @@
 		onError: console.error,
 
 		onNotSupported: function() {
+			document.getElementById("info").style.display = "none";
 			document.getElementById("notSupported").style.display = "block";
 		}
 	});
