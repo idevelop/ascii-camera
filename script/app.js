@@ -11,7 +11,7 @@
 			ascii.fromCanvas(canvas, context, {
 				contrast: 5
 			}, function(asciiString) {
-				asciiContainer.innerText = asciiString;
+				asciiContainer.innerHTML = asciiString;
 			});
 		},
 
