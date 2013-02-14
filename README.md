@@ -8,6 +8,7 @@ ASCII Camera uses the HTML5 getUserMedia API to transform a video stream from yo
 ## Browsers supported
 
 * Chrome &ge; 21
+* Firefox &ge; 17 (requires `media.navigator.enabled = true` in `about:config`)
 
 ## Author
 
