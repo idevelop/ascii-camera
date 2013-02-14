@@ -46,7 +46,7 @@ var camera = (function() {
 		var drawInterval = Math.round(1000 / options.fps);
 		var draw = function() {
 			context.drawImage(video, 0, 0, video.width, video.height);
-			options.onFrame(canvas, context);
+			options.onFrame(canvas);
 
 			setTimeout(draw, drawInterval);
 		};

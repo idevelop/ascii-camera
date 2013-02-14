@@ -15,11 +15,12 @@
 		fps: 30,
 		mirror: true,
 
-		onFrame: function(canvas, context) {
-			ascii.fromCanvas(canvas, context, {
-				contrast: 5
-			}, function(asciiString) {
-				asciiContainer.innerHTML = asciiString;
+		onFrame: function(canvas) {
+			ascii.fromCanvas(canvas, {
+				// contrast: 128,
+				callback: function(asciiString) {
+					asciiContainer.innerHTML = asciiString;
+				}
 			});
 		},
 

@@ -1,24 +1,27 @@
 // Author: Andrei Gheorghe (http://github.com/idevelop)
 
 var ascii = (function() {
-	function asciiFromCanvas(canvas, context, options, callback) {
+	function asciiFromCanvas(canvas, options) {
 		// Original code from http://www.nihilogic.dk/labs/jsascii/
 		// Heavily modified by Andrei Gheorghe (http://github.com/idevelop)
 
 		var characters = (" .,:;i1tfLCG08@").split("");
 
+		var context = canvas.getContext("2d");
+
 		var canvasWidth = canvas.width;
 		var canvasHeight = canvas.height;
-		var contrastAmount = options.contrast || 5;
 		
 		var asciiCharacters = "";
 
-		// apply contrast
-		context = applyContrast(canvas, context, contrastAmount);
+		// increase the contrast of the image so that the ASCII representation looks better
+		context = applyContrast(canvas, context, options.contrast);
 
 		var imageData = context.getImageData(0, 0, canvasWidth, canvasHeight);
-		for (var y = 0; y < canvasHeight; y += 2) {
+		for (var y = 0; y < canvasHeight; y += 2) { // every other row because letters are not square
 			for (var x = 0; x < canvasWidth; x++) {
+				// get each pixel's brightness and output corresponding character
+
 				var offset = (y * canvasWidth + x) * 4;
 
 				var color = {
@@ -39,7 +42,7 @@ var ascii = (function() {
 			asciiCharacters += "\n";
 		}
 
-		callback(asciiCharacters);
+		options.callback(asciiCharacters);
 	}
 
 	function applyContrast(canvas, context, contrast) {
@@ -58,13 +61,15 @@ var ascii = (function() {
 				alpha: imageData.data[i + 3]
 			};
 		
+			// http://thecryptmag.com/Online/56/imgproc_5.html
+			var factor = (259 * (contrast + 255)) / (255 * (259 - contrast));
 			var result = {
-				red: ((color.red - 125) * contrast) + 125,
-				green: ((color.green - 125) * contrast) + 125,
-				blue: ((color.blue - 125) * contrast) + 125,
+				red: Math.floor((color.red - 128) * factor) + 128,
+				green: Math.floor((color.green - 128) * factor) + 128,
+				blue: Math.floor((color.blue - 128) * factor) + 128,
 				alpha: color.alpha
 			};
-						
+
 			contrastedImageData.data[i] = result.red;
 			contrastedImageData.data[i + 1] = result.green;
 			contrastedImageData.data[i + 2] = result.blue;
@@ -72,10 +77,17 @@ var ascii = (function() {
 		}
 
 		contrastedContext.putImageData(contrastedImageData, 0, 0);
+
 		return contrastedContext;
 	}
 
 	return {
-		fromCanvas: asciiFromCanvas
+		fromCanvas: function(canvas, options) {
+			options = options || {};
+			options.contrast = options.contrast || 128;
+			options.callback = options.callback || doNothing;
+
+			return asciiFromCanvas(canvas, options);
+		}
 	};
 })();
