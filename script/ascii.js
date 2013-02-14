@@ -8,14 +8,14 @@ var ascii = (function() {
 		var characters = (" .,:;i1tfLCG08@").split("");
 
 		var context = canvas.getContext("2d");
-
 		var canvasWidth = canvas.width;
 		var canvasHeight = canvas.height;
 		
 		var asciiCharacters = "";
 
-		// increase the contrast of the image so that the ASCII representation looks better
-		context = applyContrast(canvas, context, options.contrast);
+		// calculate contrast factor
+		// http://www.dfstudios.co.uk/articles/image-processing-algorithms-part-5/
+		var contrastFactor = (259 * (options.contrast + 255)) / (255 * (259 - options.contrast));
 
 		var imageData = context.getImageData(0, 0, canvasWidth, canvasHeight);
 		for (var y = 0; y < canvasHeight; y += 2) { // every other row because letters are not square
@@ -31,8 +31,18 @@ var ascii = (function() {
 					alpha: imageData.data[offset + 3]
 				};
 	
+				// increase the contrast of the image so that the ASCII representation looks better
+				// http://www.dfstudios.co.uk/articles/image-processing-algorithms-part-5/
+				var contrastedColor = {
+					red: bound(Math.floor((color.red - 128) * contrastFactor) + 128, [0, 255]),
+					green: bound(Math.floor((color.green - 128) * contrastFactor) + 128, [0, 255]),
+					blue: bound(Math.floor((color.blue - 128) * contrastFactor) + 128, [0, 255]),
+					alpha: color.alpha
+				};
+
+				// calculate pixel brightness
 				// http://stackoverflow.com/questions/596216/formula-to-determine-brightness-of-rgb-color
-				var brightness = (0.299 * color.red + 0.587 * color.green + 0.114 * color.blue) / 255;
+				var brightness = (0.299 * contrastedColor.red + 0.587 * contrastedColor.green + 0.114 * contrastedColor.blue) / 255;
 
 				var character = characters[(characters.length - 1) - Math.round(brightness * (characters.length - 1))];
 
@@ -45,46 +55,14 @@ var ascii = (function() {
 		options.callback(asciiCharacters);
 	}
 
-	function applyContrast(canvas, context, contrast) {
-		var imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-		
-		var contrastedCanvas = document.createElement("canvas");
-		var contrastedContext = contrastedCanvas.getContext("2d");
-		var contrastedImageData = contrastedContext.createImageData(imageData.width, imageData.height);
-
-		var imageDataLength = imageData.data.length;
-		for (var i = 0; i < imageDataLength; i += 4) {
-			var color = {
-				red: imageData.data[i],
-				green: imageData.data[i + 1],
-				blue: imageData.data[i + 2],
-				alpha: imageData.data[i + 3]
-			};
-		
-			// http://thecryptmag.com/Online/56/imgproc_5.html
-			var factor = (259 * (contrast + 255)) / (255 * (259 - contrast));
-			var result = {
-				red: Math.floor((color.red - 128) * factor) + 128,
-				green: Math.floor((color.green - 128) * factor) + 128,
-				blue: Math.floor((color.blue - 128) * factor) + 128,
-				alpha: color.alpha
-			};
-
-			contrastedImageData.data[i] = result.red;
-			contrastedImageData.data[i + 1] = result.green;
-			contrastedImageData.data[i + 2] = result.blue;
-			contrastedImageData.data[i + 3] = result.alpha;
-		}
-
-		contrastedContext.putImageData(contrastedImageData, 0, 0);
-
-		return contrastedContext;
+	function bound(value, interval) {
+		return Math.max(interval[0], Math.min(interval[1], value));
 	}
 
 	return {
 		fromCanvas: function(canvas, options) {
 			options = options || {};
-			options.contrast = options.contrast || 128;
+			options.contrast = (typeof options.contrast === "undefined" ? 128 : options.contrast);
 			options.callback = options.callback || doNothing;
 
 			return asciiFromCanvas(canvas, options);
