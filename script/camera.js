@@ -70,6 +70,16 @@ var camera = (function() {
 			options.onFrame = options.onFrame || doNothing;
 
 			initCamera(options);
+		},
+
+		stop: function() {
+			video.pause();
+			
+			if (video.mozCaptureStream) {
+				video.mozSrcObject = null;
+			} else {
+				video.src = "";
+			}
 		}
 	};
 })();
