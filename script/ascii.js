@@ -24,12 +24,7 @@ var ascii = (function() {
 
 				var offset = (y * canvasWidth + x) * 4;
 
-				var color = {
-					red: imageData.data[offset],
-					green: imageData.data[offset + 1],
-					blue: imageData.data[offset + 2],
-					alpha: imageData.data[offset + 3]
-				};
+				var color = getColorAtOffset(imageData.data, offset);
 	
 				// increase the contrast of the image so that the ASCII representation looks better
 				// http://www.dfstudios.co.uk/articles/image-processing-algorithms-part-5/
@@ -53,6 +48,15 @@ var ascii = (function() {
 		}
 
 		options.callback(asciiCharacters);
+	}
+
+	function getColorAtOffset(data, offset) {
+		return {
+			red: data[offset],
+			green: data[offset + 1],
+			blue: data[offset + 2],
+			alpha: data[offset + 3]
+		};
 	}
 
 	function bound(value, interval) {
