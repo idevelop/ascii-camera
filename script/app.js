@@ -32,6 +32,7 @@
 
 		onNotSupported: function() {
 			document.getElementById("info").style.display = "none";
+			asciiContainer.style.display = "none";
 			document.getElementById("notSupported").style.display = "block";
 		}
 	});
