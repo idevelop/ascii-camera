@@ -45,8 +45,10 @@ var camera = (function() {
 
 		var drawInterval = Math.round(1000 / options.fps);
 		var draw = function() {
-			context.drawImage(video, 0, 0, video.width, video.height);
-			options.onFrame(canvas);
+			try {
+				context.drawImage(video, 0, 0, video.width, video.height);
+				options.onFrame(canvas);
+			} catch (e) { }
 
 			setTimeout(draw, drawInterval);
 		};
@@ -74,7 +76,7 @@ var camera = (function() {
 
 		stop: function() {
 			video.pause();
-			
+
 			if (video.mozCaptureStream) {
 				video.mozSrcObject = null;
 			} else {
