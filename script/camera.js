@@ -1,8 +1,6 @@
 // Author: Andrei Gheorghe (http://github.com/idevelop)
 
 var camera = (function() {
-	var doNothing = function(){};
-
 	function initCamera(options) {
 		var video = document.createElement("video");
 		video.setAttribute('width', options.width);
@@ -22,7 +20,7 @@ var camera = (function() {
 				} else {
 					video.src = (window.URL && window.URL.createObjectURL(stream)) || stream;
 				}
-
+				
 				startVideoStream(video, options);
 			}, options.onError);
 		} else {
@@ -59,6 +57,8 @@ var camera = (function() {
 
 	return {
 		init: function(options) {
+			var doNothing = function(){};
+
 			options = options || {};
 			options.fps = options.fps || 30;
 			options.width = options.width || 640;
