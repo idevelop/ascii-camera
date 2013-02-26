@@ -41,18 +41,16 @@ var camera = (function() {
 			context.scale(-1, 1);
 		}
 
-		var drawInterval = Math.round(1000 / options.fps);
-		var draw = function() {
+		video.play();
+
+		setInterval(function() {
 			try {
 				context.drawImage(video, 0, 0, video.width, video.height);
 				options.onFrame(canvas);
-			} catch (e) { }
-
-			setTimeout(draw, drawInterval);
-		};
-
-		video.play();
-		draw();
+			} catch (e) {
+				// TODO
+			}
+		}, Math.round(1000 / options.fps));
 	}
 
 	return {
