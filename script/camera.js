@@ -1,13 +1,15 @@
 /*
 	camera.js v1.0
 	http://github.com/idevelop/camera.js
-	
-	Author: Andrei Gheorghe
+
+	Author: Andrei Gheorghe (http://idevelop.github.com)
 	License: MIT
 */
 
 var camera = (function() {
-	function initCamera(options) {
+	var renderTimer;
+
+	function initVideoStream(options) {
 		var video = document.createElement("video");
 		video.setAttribute('width', options.width);
 		video.setAttribute('height', options.height);
@@ -27,14 +29,14 @@ var camera = (function() {
 					video.src = (window.URL && window.URL.createObjectURL(stream)) || stream;
 				}
 				
-				startVideoStream(video, options);
+				startCapture(video, options);
 			}, options.onError);
 		} else {
 			options.onNotSupported();
 		}
 	}
 
-	function startVideoStream(video, options) {
+	function startCapture(video, options) {
 		var canvas = options.targetCanvas || document.createElement("canvas");
 		canvas.setAttribute('width', options.width);
 		canvas.setAttribute('height', options.height);
@@ -49,7 +51,7 @@ var camera = (function() {
 
 		video.play();
 
-		setInterval(function() {
+		renderTimer = setInterval(function() {
 			try {
 				context.drawImage(video, 0, 0, video.width, video.height);
 				options.onFrame(canvas);
@@ -57,6 +59,18 @@ var camera = (function() {
 				// TODO
 			}
 		}, Math.round(1000 / options.fps));
+	}
+
+	function stopCapture() {
+		if (renderTimer) clearInterval(renderTimer);
+
+		video.pause();
+
+		if (video.mozSrcObject !== undefined) {
+			video.mozSrcObject = null;
+		} else {
+			video.src = "";
+		}
 	}
 
 	return {
@@ -75,17 +89,9 @@ var camera = (function() {
 			options.onNotSupported = options.onNotSupported || doNothing;
 			options.onFrame = options.onFrame || doNothing;
 
-			initCamera(options);
+			initVideoStream(options);
 		},
 
-		stop: function() {
-			video.pause();
-
-			if (video.mozSrcObject !== undefined) {
-				video.mozSrcObject = null;
-			} else {
-				video.src = "";
-			}
-		}
+		stop: stopCapture
 	};
 })();
