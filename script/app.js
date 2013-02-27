@@ -28,7 +28,9 @@
 			document.getElementById("info").style.display = "none";
 		},
 
-		onError: console.error,
+		onError: function(error) {
+			// TODO: log error
+		},
 
 		onNotSupported: function() {
 			document.getElementById("info").style.display = "none";
