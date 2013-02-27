@@ -1,5 +1,10 @@
-// Author: Andrei Gheorghe (http://github.com/idevelop)
-// Version: 1.0 (27.02.2013)
+/*
+	camera.js v1.0
+	http://github.com/idevelop/camera.js
+	
+	Author: Andrei Gheorghe
+	License: MIT
+*/
 
 var camera = (function() {
 	function initCamera(options) {
