@@ -58,3 +58,24 @@ h1 {
 #fork:hover {
 	text-decoration: underline;
 }
+
+#pause {
+  display: block;
+  position: fixed;
+  z-index: 10;
+
+  top: 0;
+  right: 200px;
+  padding: 10px 50px 10px 10px;
+
+  background: #0090ff;
+
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  text-decoration: none;
+  color: #fff;
+
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
