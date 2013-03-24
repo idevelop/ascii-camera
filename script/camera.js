@@ -1,5 +1,5 @@
 /*
-	camera.js v1.0
+	camera.js v1.1
 	http://github.com/idevelop/camera.js
 
 	Author: Andrei Gheorghe (http://idevelop.github.com)
@@ -7,10 +7,12 @@
 */
 
 var camera = (function() {
+	var options;
+	var video, canvas, context;
 	var renderTimer;
 
-	function initVideoStream(options) {
-		var video = document.createElement("video");
+	function initVideoStream() {
+		video = document.createElement("video");
 		video.setAttribute('width', options.width);
 		video.setAttribute('height', options.height);
 
@@ -29,19 +31,19 @@ var camera = (function() {
 					video.src = (window.URL && window.URL.createObjectURL(stream)) || stream;
 				}
 				
-				startCapture(video, options);
+				initCanvas();
 			}, options.onError);
 		} else {
 			options.onNotSupported();
 		}
 	}
 
-	function startCapture(video, options) {
-		var canvas = options.targetCanvas || document.createElement("canvas");
+	function initCanvas() {
+		canvas = options.targetCanvas || document.createElement("canvas");
 		canvas.setAttribute('width', options.width);
 		canvas.setAttribute('height', options.height);
 
-		var context = canvas.getContext('2d');
+		context = canvas.getContext('2d');
 
 		// mirror video
 		if (options.mirror) {
@@ -49,6 +51,10 @@ var camera = (function() {
 			context.scale(-1, 1);
 		}
 
+		startCapture();
+	}
+
+	function startCapture() {
 		video.play();
 
 		renderTimer = setInterval(function() {
@@ -62,9 +68,7 @@ var camera = (function() {
 	}
 
 	function stopCapture() {
-		if (renderTimer) clearInterval(renderTimer);
-
-		video.pause();
+		pauseCapture();
 
 		if (video.mozSrcObject !== undefined) {
 			video.mozSrcObject = null;
@@ -73,11 +77,17 @@ var camera = (function() {
 		}
 	}
 
+	function pauseCapture() {
+		if (renderTimer) clearInterval(renderTimer);
+		video.pause();
+	}
+
 	return {
-		init: function(options) {
+		init: function(captureOptions) {
 			var doNothing = function(){};
 
-			options = options || {};
+			options = captureOptions || {};
+
 			options.fps = options.fps || 30;
 			options.width = options.width || 640;
 			options.height = options.height || 480;
@@ -89,8 +99,12 @@ var camera = (function() {
 			options.onNotSupported = options.onNotSupported || doNothing;
 			options.onFrame = options.onFrame || doNothing;
 
-			initVideoStream(options);
+			initVideoStream();
 		},
+
+		start: startCapture,
+
+		pause: pauseCapture,
 
 		stop: stopCapture
 	};

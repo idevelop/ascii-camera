@@ -70,3 +70,11 @@ h1 {
 	right: 200px;
 	background: url('../images/idevelop.png') #fff no-repeat 95% 50%;	
 }
+
+#pause {
+	display: none;
+	margin: 20px auto;
+	padding: 10px 20px;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: 18px;
+}

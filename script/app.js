@@ -8,6 +8,7 @@
 
 (function() {
 	var asciiContainer = document.getElementById("ascii");
+	var capturing = false;
 
 	camera.init({
 		width: 160,
@@ -26,6 +27,17 @@
 
 		onSuccess: function() {
 			document.getElementById("info").style.display = "none";
+
+			capturing = true;
+			document.getElementById("pause").style.display = "block";
+			document.getElementById("pause").onclick = function() {
+				if (capturing) {
+					camera.pause();
+				} else {
+					camera.start();
+				}
+				capturing = !capturing;
+			};
 		},
 
 		onError: function(error) {
