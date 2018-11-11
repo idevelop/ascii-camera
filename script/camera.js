@@ -30,7 +30,7 @@ var camera = (function() {
 				} else {
 					video.src = (window.URL && window.URL.createObjectURL(stream)) || stream;
 				}
-				
+
 				initCanvas();
 			}, options.onError);
 		} else {
@@ -50,8 +50,6 @@ var camera = (function() {
 			context.translate(canvas.width, 0);
 			context.scale(-1, 1);
 		}
-
-		startCapture();
 	}
 
 	function startCapture() {

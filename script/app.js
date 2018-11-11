@@ -28,13 +28,15 @@
 		onSuccess: function() {
 			document.getElementById("info").style.display = "none";
 
-			capturing = true;
-			document.getElementById("pause").style.display = "block";
-			document.getElementById("pause").onclick = function() {
+			const button = document.getElementById("button");
+			button.style.display = "block";
+			button.onclick = function() {
 				if (capturing) {
 					camera.pause();
+					button.innerText = 'resume';
 				} else {
 					camera.start();
+					button.innerText = 'pause';
 				}
 				capturing = !capturing;
 			};
