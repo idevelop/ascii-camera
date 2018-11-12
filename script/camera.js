@@ -15,20 +15,23 @@ var camera = (function() {
 		video = document.createElement("video");
 		video.setAttribute('width', options.width);
 		video.setAttribute('height', options.height);
+		video.setAttribute('playsinline', 'true');
+		video.setAttribute('webkit-playsinline', 'true');
 
 		navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
 		window.URL = window.URL || window.webkitURL || window.mozURL || window.msURL;
 
 		if (navigator.getUserMedia) {
 			navigator.getUserMedia({
-				video: true
+				video: true,
+				audio: false,
 			}, function(stream) {
 				options.onSuccess();
 
 				if (video.mozSrcObject !== undefined) { // hack for Firefox < 19
 					video.mozSrcObject = stream;
 				} else {
-					video.src = (window.URL && window.URL.createObjectURL(stream)) || stream;
+					video.srcObject = stream;
 				}
 
 				initCanvas();
@@ -71,7 +74,7 @@ var camera = (function() {
 		if (video.mozSrcObject !== undefined) {
 			video.mozSrcObject = null;
 		} else {
-			video.src = "";
+			video.srcObject = null;
 		}
 	}
 
