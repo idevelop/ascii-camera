@@ -3,7 +3,7 @@ ASCII Camera
 
 ASCII Camera uses the HTML5 getUserMedia API to transform a video stream from your webcam into a real-time ASCII representation.
 
-**[See it in action](https://idevelop.ro/ascii-camera/)**.
+**[See it in action](https://idevelop.github.com/ascii-camera/)**.
 
 <img src="https://idevelop.github.com/images/ascii-screenshot.png" />
 
