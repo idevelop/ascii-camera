@@ -28,8 +28,8 @@ h1 {
 
 #ascii {
 	font-family: 'Courier New', 'Courier', monospace;
-	font-size: 14px;
-	line-height: 14px;
+	font-size: 18px;
+	line-height: 18px;
 	letter-spacing: -1.5px;
 	text-align: center;
 }
@@ -39,7 +39,7 @@ h1 {
 	margin: 20px auto;
 	padding: 10px 20px;
 	font-family: 'Courier New', 'Courier', monospace;
-	font-size: 18px;
+	font-size: 36px;
 	background-color: red;
 	color: white;
 	border: none;
