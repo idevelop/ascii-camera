@@ -11,8 +11,8 @@
 	var capturing = false;
 
 	camera.init({
-		width: 160,
-		height: 120,
+		width: 86,
+		height: 64,
 		fps: 30,
 		mirror: true,
 
@@ -33,10 +33,10 @@
 			button.onclick = function() {
 				if (capturing) {
 					camera.pause();
-					button.innerText = 'resume';
+					button.innerText = 'start';
 				} else {
 					camera.start();
-					button.innerText = 'pause';
+					button.innerText = 'capture';
 				}
 				capturing = !capturing;
 			};

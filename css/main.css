@@ -5,8 +5,8 @@ body {
 }
 
 h1 {
-	font-family: 'Helvetica neue', 'Helvetica', 'Arial', sans-serif;
-	font-size: 48px;
+	font-family: 'Courier New', 'Courier', monospace;
+	font-size: 24px;
 	font-weight: 300;
 	color: #999;
 	text-align: center;
@@ -28,8 +28,8 @@ h1 {
 
 #ascii {
 	font-family: 'Courier New', 'Courier', monospace;
-	font-size: 10px;
-	line-height: 10px;
+	font-size: 14px;
+	line-height: 14px;
 	letter-spacing: -1.5px;
 	text-align: center;
 }
@@ -48,7 +48,7 @@ h1 {
 	border: 1px solid #0090ff;
 	border-top: 0;
 
-	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-family: 'Courier New', 'Courier', monospace;
 	font-weight: 500;
 	font-size: 14px;
 	text-decoration: none;
@@ -75,6 +75,6 @@ h1 {
 	display: none;
 	margin: 20px auto;
 	padding: 10px 20px;
-	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-	font-size: 18px;
+	font-family: 'Courier New', 'Courier', monospace;
+	font-size: 24px;
 }
