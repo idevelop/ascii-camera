@@ -6,7 +6,7 @@ body {
 
 h1 {
 	font-family: 'Courier New', 'Courier', monospace;
-	font-size: 24px;
+	font-size: 48px;
 	font-weight: 300;
 	color: #999;
 	text-align: center;
@@ -34,7 +34,7 @@ h1 {
 	text-align: center;
 }
 
-#fork,
+/* #fork,
 #idevelop {
 	display: block;
 	position: fixed;
@@ -71,10 +71,15 @@ h1 {
 	background: url('../images/idevelop.png') #fff no-repeat 95% 50%;
 }
 
+*/
+
 #button {
 	display: none;
 	margin: 20px auto;
 	padding: 10px 20px;
 	font-family: 'Courier New', 'Courier', monospace;
-	font-size: 24px;
-}
+	font-size: 18px;
+	background-color: red;
+	color: white;
+	border: none;
+} 
