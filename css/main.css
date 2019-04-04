@@ -17,7 +17,7 @@ h1 {
 }
 
 #notSupported h1 {
-	color: #b41a1a;
+	color: red;
 	margin-bottom: 20px;
 }
 
@@ -33,45 +33,6 @@ h1 {
 	letter-spacing: -1.5px;
 	text-align: center;
 }
-
-/* #fork,
-#idevelop {
-	display: block;
-	position: fixed;
-	z-index: 10;
-
-	top: 0;
-	right: 30px;
-	padding: 10px 50px 10px 10px;
-
-	background: url('../images/blacktocat.png') #0090ff no-repeat 95% 50%;
-	border: 1px solid #0090ff;
-	border-top: 0;
-
-	font-family: 'Courier New', 'Courier', monospace;
-	font-weight: 500;
-	font-size: 14px;
-	text-decoration: none;
-	color: #fff;
-
-	border-bottom-left-radius: 3px;
-	border-bottom-right-radius: 3px;
-}
-
-#fork:hover,
-#idevelop:hover {
-	text-decoration: underline;
-}
-
-#idevelop {
-	border: 1px solid #eee;
-	border-top: 0;
-	color: #333;
-	right: 200px;
-	background: url('../images/idevelop.png') #fff no-repeat 95% 50%;
-}
-
-*/
 
 #button {
 	display: none;
