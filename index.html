@@ -11,14 +11,17 @@
 
 	<div id="notSupported">
 		<h1>Your browser does not support the Camera API.</h1>
-		<img src="images/screenshot.png" align="center" />
 	</div>
 
 	<pre id="ascii"></pre>
-	<button id="button">start</button>
+	<button id="button" onclick='test()'>start</button>
+
+	<!-- the download link is hidden, but a click is simulated in javascript -->
+	<a id='download' href='' style='display: none'>download frame</a>
+
 	<script src="script/camera.js"></script>
 	<script src="script/ascii.js"></script>
 	<script src="script/app.js"></script>
-	<script src="script/print.js"></script>
+	<!-- <script src="script/print.js"></script> -->
 </body>
 </html>
