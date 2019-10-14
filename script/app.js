@@ -45,9 +45,9 @@
 		},
 
 		onNotSupported: function() {
-			document.getElementById("info").style.display = "none";
 			asciiContainer.style.display = "none";
-			document.getElementById("notSupported").style.display = "block";
+			document.querySelector("#info").style.display = "none";			
+			document.querySelector("#notSupported").style.display = "block";
 		}
 	});
 })();
