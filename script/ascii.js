@@ -65,7 +65,7 @@ var ascii = (function() {
 
 	return {
 		fromCanvas: function(canvas, options = {}) {
-			Object.assign({}, { contrast: 128, callback: () => {} }, options);
+			options = Object.assign({}, { contrast: 128, callback: () => {} }, options);
 			
 			return asciiFromCanvas(canvas, options);
 		}
