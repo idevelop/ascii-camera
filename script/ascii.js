@@ -64,11 +64,9 @@ var ascii = (function() {
 	}
 
 	return {
-		fromCanvas: function(canvas, options) {
-			options = options || {};
-			options.contrast = (typeof options.contrast === "undefined" ? 128 : options.contrast);
-			options.callback = options.callback || doNothing;
-
+		fromCanvas: function(canvas, options = {}) {
+			options = Object.assign({}, { contrast: 128, callback: () => {} }, options);
+			
 			return asciiFromCanvas(canvas, options);
 		}
 	};
